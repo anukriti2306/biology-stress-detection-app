@@ -3,6 +3,24 @@
 ---
 
 # Human Stress Detection in and through Sleep
+## 🌐 Deployment - 🚀 Live Frontend (Streamlit)
+
+Access the deployed frontend here:  
+
+[![Open in Streamlit](https://img.shields.io/badge/Launch%20App-Streamlit-orange?style=for-the-badge&logo=streamlit)](https://stress-detector-a23.streamlit.app/)
+
+<img width="964" height="899" alt="image" src="https://github.com/user-attachments/assets/c28e9754-4fcc-48c1-919a-9fd5f6f235d3" />
+
+
+## 🛠️ Backend API (Flask)
+The Flask API is deployed on Railway and can be accessed here:
+
+```bash
+https://biology-backend-production.up.railway.app/predict
+```
+You can send a POST request to this endpoint with the required JSON payload to get stress predictions.
+
+
 
 ## 🧠 Project Overview
 
