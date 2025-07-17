@@ -5,7 +5,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Flask API Endpoint
-API_URL = "http://127.0.0.1:5000/predict"
+API_URL = "https://biology-backend-production.up.railway.app/predict"
+
 
 # --- Page Configuration ---
 st.set_page_config(page_title="Stress Detector", layout="centered")

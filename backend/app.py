@@ -1,6 +1,8 @@
 import pickle
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import numpy as np
+import os
 
 # Load model
 model_file = r'model/final_model.bin'
@@ -22,6 +24,11 @@ most_important_features = ['heart_rate', 'sleeping_hours', 'snoring_rate', 'body
 # Initialize Flask app
 app = Flask(__name__)
 
+# Enable CORS for your Streamlit frontend
+CORS(app, resources={
+    r"/predict": {"origins": "https://stress-detector-a23.streamlit.app"}
+})
+
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.get_json()
@@ -34,15 +41,14 @@ def predict():
         return jsonify({'error': f'Invalid input type: {e}'}), 400
 
     X_input = dv.transform([input_data])
-    model_output = int(model.predict(X_input)[0])  # 0 to 4
-    user_friendly_level = model_output          # 1 to 5
+    model_output = int(model.predict(X_input)[0])  # 1 to 5
     description = stress_labels.get(model_output, 'Unknown')
 
     return jsonify({
-        'stress_level': user_friendly_level,
+        'stress_level': model_output,
         'description': description
     })
 
-
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(debug=False, host='0.0.0.0', port=port)
